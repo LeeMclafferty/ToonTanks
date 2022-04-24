@@ -31,11 +31,12 @@ void ATankPawn::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (controller != nullptr)
-		controller = Cast<APlayerController>(GetController());
+	//UE_LOG(LogTemp, Error, TEXT("Controller not found in TankPawn class"));
+	controller = Cast<APlayerController>(GetController());
 
-	DrawDebugSphere(GetWorld(), (GetActorLocation() + FVector(0.f, 0.f, 200.f)), 100.f, 32, FColor::Red, true, 30.f);
-	
+
+	//DrawDebugSphere(GetWorld(), (GetActorLocation() + FVector(0.f, 0.f, 200.f)), 100.f, 32, FColor::Red, true, 30.f);
+
 }
 
 void ATankPawn::Tick(float DeltaTime)
@@ -44,8 +45,13 @@ void ATankPawn::Tick(float DeltaTime)
 
 	if (controller)
 	{
+		FInputModeGameAndUI input_mode;
 		FHitResult hit_result;
 		controller->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, hit_result);
+
+		controller->SetInputMode(input_mode);
+		DrawDebugSphere(GetWorld(), hit_result.ImpactPoint, 25.f, 12, FColor::Red, false, -1.f);
+		RotateTurret(hit_result.ImpactPoint);
 	}
 }
 

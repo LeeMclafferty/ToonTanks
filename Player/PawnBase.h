@@ -31,5 +31,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	class USceneComponent* projectile_spawn;
 
+	void RotateTurret(FVector target_location);
 
 };

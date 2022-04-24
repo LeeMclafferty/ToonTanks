@@ -30,9 +30,21 @@ void APawnBase::BeginPlay()
 	
 }
 
+
 void APawnBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
 }
 
+void APawnBase::RotateTurret(FVector target_location)
+{
+	//Get the direction you want to point by subtracting the target location by the turrets location then set the 
+	//rotation
+
+
+	FVector to_target = target_location - turret_mesh->GetComponentLocation();
+	FRotator look_rotation(0.f, to_target.Rotation().Yaw, 0.f);
+
+	turret_mesh->SetWorldRotation(look_rotation);
+}
