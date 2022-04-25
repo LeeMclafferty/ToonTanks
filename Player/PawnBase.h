@@ -32,5 +32,10 @@ protected:
 	class USceneComponent* projectile_spawn;
 
 	void RotateTurret(FVector target_location);
+	
+	UPROPERTY(EditDefaultsOnly,Category = "Combat")
+	TSubclassOf<class AProjectile> projectile_class;
+
+	void Fire();
 
 };

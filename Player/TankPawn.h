@@ -30,6 +30,9 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Movement", meta = (AllowProtectedAccess = "true"))
 	float turn_rate;
 
+	UPROPERTY(EditAnywhere, Category = "Combat", meta = (AllowProtectedAccess = "true"))
+	float fire_rate;
+
 private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Camera")
@@ -40,6 +43,7 @@ private:
 
 	void Move(float value);
 	void Turn(float value);
+	void Attack();
 
 	class APlayerController* controller;
 	

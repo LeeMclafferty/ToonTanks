@@ -4,6 +4,8 @@
 #include "Components/StaticMeshComponent.h"
 #include "Components/CapsuleComponent.h"
 
+#include "ToonTanks/World/Projectile.h"
+
 
 
 APawnBase::APawnBase()
@@ -47,4 +49,10 @@ void APawnBase::RotateTurret(FVector target_location)
 	FRotator look_rotation(0.f, to_target.Rotation().Yaw, 0.f);
 
 	turret_mesh->SetWorldRotation(look_rotation);
+}
+
+//Called in child classes.
+void APawnBase::Fire()
+{
+	GetWorld()->SpawnActor<AProjectile>(projectile_class, projectile_spawn->GetComponentLocation(), projectile_spawn->GetComponentRotation());
 }

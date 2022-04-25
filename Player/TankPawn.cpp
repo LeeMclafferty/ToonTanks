@@ -25,6 +25,8 @@ void ATankPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComp
 
 	PlayerInputComponent->BindAxis(TEXT("MoveForward"), this, &ATankPawn::Move);
 	PlayerInputComponent->BindAxis(TEXT("Turn"), this, &ATankPawn::Turn);
+
+	PlayerInputComponent->BindAction(TEXT("Fire"), IE_Pressed, this, &ATankPawn::Attack);
 }
 
 void ATankPawn::BeginPlay()
@@ -50,7 +52,7 @@ void ATankPawn::Tick(float DeltaTime)
 		controller->GetHitResultUnderCursor(ECollisionChannel::ECC_Visibility, false, hit_result);
 
 		controller->SetInputMode(input_mode);
-		DrawDebugSphere(GetWorld(), hit_result.ImpactPoint, 25.f, 12, FColor::Red, false, -1.f);
+		//DrawDebugSphere(GetWorld(), hit_result.ImpactPoint, 25.f, 12, FColor::Red, false, -1.f);
 		RotateTurret(hit_result.ImpactPoint);
 	}
 }
@@ -72,4 +74,9 @@ void ATankPawn::Turn(float value)
 	delta_rotation.Yaw = (value * GetWorld()->GetDeltaSeconds()) * turn_rate;
 
 	AddActorLocalRotation(delta_rotation, true);
+}
+
+void ATankPawn::Attack()
+{
+	Fire();
 }
