@@ -35,7 +35,7 @@ void ATankPawn::BeginPlay()
 
 	//UE_LOG(LogTemp, Error, TEXT("Controller not found in TankPawn class"));
 	controller = Cast<APlayerController>(GetController());
-
+	controller->bShowMouseCursor = true;
 
 	//DrawDebugSphere(GetWorld(), (GetActorLocation() + FVector(0.f, 0.f, 200.f)), 100.f, 32, FColor::Red, true, 30.f);
 

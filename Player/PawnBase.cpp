@@ -54,5 +54,6 @@ void APawnBase::RotateTurret(FVector target_location)
 //Called in child classes.
 void APawnBase::Fire()
 {
-	GetWorld()->SpawnActor<AProjectile>(projectile_class, projectile_spawn->GetComponentLocation(), projectile_spawn->GetComponentRotation());
+	auto projectile = GetWorld()->SpawnActor<AProjectile>(projectile_class, projectile_spawn->GetComponentLocation(), projectile_spawn->GetComponentRotation());
+	projectile->SetOwner(this);
 }
