@@ -24,8 +24,9 @@ protected:
 
 private:
 	UPROPERTY(EditAnywhere)
-	float max_health = 100.f;
-	float current_health = 0.f;
+	float max_health;
+
+	float current_health;
 
 	UFUNCTION()
 	void DamageTaken(AActor* damaged_actor, float damage, const UDamageType* damage_type, class AController* instigator, AActor* damage_causer);

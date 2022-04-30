@@ -33,7 +33,7 @@ void AProjectile::BeginPlay()
 void AProjectile::OnHit(UPrimitiveComponent* hit_comp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector normal_impulse, const FHitResult& hit)
 {
 	auto my_owner = GetOwner();
-	if (my_owner == nullptr) 
+	if (my_owner == nullptr)
 		return;
 
 	auto my_owner_instigator = my_owner->GetInstigatorController();
@@ -42,6 +42,7 @@ void AProjectile::OnHit(UPrimitiveComponent* hit_comp, AActor* OtherActor, UPrim
 	if (OtherActor && OtherActor != this && OtherActor != my_owner)
 	{
 		UGameplayStatics::ApplyDamage(OtherActor, this->damage, my_owner_instigator, this, damage_type_class);
+		this->Destroy();
 	}
 }
 

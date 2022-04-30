@@ -13,8 +13,8 @@ UHealthComponent::UHealthComponent()
 
 	max_health = 100.f;
 	current_health = 0.f;
-}
 
+}
 
 // Called when the game starts
 void UHealthComponent::BeginPlay()
@@ -23,10 +23,10 @@ void UHealthComponent::BeginPlay()
 
 	current_health = max_health;
 
+	//When this components owner takes damage call DamageTaken
 	if(GetOwner() != nullptr)
 		GetOwner()->OnTakeAnyDamage.AddDynamic(this, &UHealthComponent::DamageTaken);
 
-	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Purple, FString::Printf(TEXT("Health: %i"), current_health));
 }
 
 
@@ -39,7 +39,7 @@ void UHealthComponent::DamageTaken(AActor* damaged_actor, float damage, const UD
 
 	current_health -= damage;
 
-	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Purple, FString::Printf(TEXT("Health: %i"), current_health));
+	//GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Purple, FString::Printf(TEXT("Health: %f"), current_health));
 	
 }
 
