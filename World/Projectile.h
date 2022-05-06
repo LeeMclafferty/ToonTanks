@@ -20,6 +20,15 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditDefaultsOnly, Category = "sfx")
+	class USoundBase* launch_sound;
+
+	UPROPERTY(EditDefaultsOnly, Category = "sfx")
+	class USoundBase* hit_sound;
+
+	UPROPERTY(EditDefaultsOnly, Category = "sfx")
+	float hit_sfx_vol;
+
 private:
 	
 	UPROPERTY(VisibleAnywhere, Category = "Components")
@@ -34,4 +43,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	float damage;
 
+	UPROPERTY(VisibleAnywhere, Category = "Combat")
+	class UParticleSystemComponent* smoke_trail_particles;
+
+	UPROPERTY(VisibleAnywhere, Category = "Combat")
+	class UParticleSystemComponent* hit_particles;
 };

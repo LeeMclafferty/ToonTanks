@@ -3,6 +3,8 @@
 #include "Components/SceneComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Particles/ParticleSystem.h"
+#include "Kismet/GameplayStatics.h"
 
 #include "ToonTanks/World/Projectile.h"
 
@@ -24,6 +26,8 @@ APawnBase::APawnBase()
 	projectile_spawn = CreateDefaultSubobject<USceneComponent>(TEXT("Projectile Spawn Location"));
 	projectile_spawn->SetupAttachment(turret_mesh);
 
+	death_sfx_volume = 1.f;
+
 }
 
 void APawnBase::BeginPlay()
@@ -37,6 +41,16 @@ void APawnBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void APawnBase::HandleDestruction()
+{
+	// TODO: Visual / sound fx
+	if (death_vfx && death_sound)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(this, death_vfx, GetActorLocation(), GetActorRotation());
+		UGameplayStatics::PlaySoundAtLocation(this,death_sound, GetActorLocation(), GetActorRotation(),death_sfx_volume);
+	}
 }
 
 void APawnBase::RotateTurret(FVector target_location)

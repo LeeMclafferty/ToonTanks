@@ -21,6 +21,10 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
+	// Call the super from pawn base here.
+	void HandleDestruction();
+
+	APlayerController* GetTankController() { return controller; }
 
 protected:
 

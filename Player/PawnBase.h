@@ -14,6 +14,7 @@ public:
 	APawnBase();
 
 	virtual void Tick(float DeltaTime) override;
+	void HandleDestruction();
 
 	
 protected:
@@ -37,5 +38,16 @@ protected:
 	TSubclassOf<class AProjectile> projectile_class;
 
 	void Fire();
+
+	UPROPERTY(EditDefaultsOnly, Category = "VFX")
+	class UParticleSystem* death_vfx;
+
+	UPROPERTY(EditDefaultsOnly, Category = "SFX")
+	class USoundBase* death_sound;
+
+	UPROPERTY(EditDefaultsOnly, Category = "SFX")
+	float death_sfx_volume;
+
+	
 
 };

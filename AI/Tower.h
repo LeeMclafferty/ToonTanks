@@ -17,7 +17,8 @@ class TOONTANKS_API ATower : public APawnBase
 public:
 	ATower();
 	virtual void Tick(float DetlaTime) override;
-
+	//Make sure to call the Super of this function declared in pawnbase.
+	void HandleDestruction();
 protected:
 
 	virtual void BeginPlay() override;

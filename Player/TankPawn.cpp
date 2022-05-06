@@ -57,6 +57,14 @@ void ATankPawn::Tick(float DeltaTime)
 	}
 }
 
+void ATankPawn::HandleDestruction()
+{
+	Super::HandleDestruction();
+	// hide actor and disable ticking so the player does not lose their view and become a spectator.
+	SetActorHiddenInGame(true);
+	SetActorTickEnabled(false);
+}
+
 void ATankPawn::Move(float value)
 {
 	//AddActorLocalOffset() moves an actor once. Call it on every frame while a direction key is held.
