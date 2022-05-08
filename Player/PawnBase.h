@@ -48,6 +48,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "SFX")
 	float death_sfx_volume;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+		TSubclassOf <class UMatineeCameraShake> death_cam_shake_class;
 	
 
 };

@@ -17,6 +17,7 @@ ATankPawn::ATankPawn()
 
 	speed = 500.f;
 	turn_rate = 120.f;
+	is_alive = true;
 }
 
 void ATankPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
@@ -63,6 +64,7 @@ void ATankPawn::HandleDestruction()
 	// hide actor and disable ticking so the player does not lose their view and become a spectator.
 	SetActorHiddenInGame(true);
 	SetActorTickEnabled(false);
+	is_alive = false;
 }
 
 void ATankPawn::Move(float value)

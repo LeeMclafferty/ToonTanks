@@ -7,6 +7,7 @@
 #include "GameFramework/DamageType.h"
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "MatineeCameraShake.h"
 
 
 
@@ -49,12 +50,16 @@ void AProjectile::OnHit(UPrimitiveComponent* hit_comp, AActor* OtherActor, UPrim
 	auto my_owner_instigator = my_owner->GetInstigatorController();
 	auto damage_type_class = UDamageType::StaticClass();
 
-	if(hit_sound)
-		UGameplayStatics::PlaySoundAtLocation(this, hit_sound,OtherActor->GetActorLocation(), OtherActor->GetActorRotation(), hit_sfx_vol);
 	if (OtherActor && OtherActor != this && OtherActor != my_owner)
 	{
 		UGameplayStatics::ApplyDamage(OtherActor, this->damage, my_owner_instigator, this, damage_type_class);
 		this->Destroy();
+
+		if (hit_sound)
+			UGameplayStatics::PlaySoundAtLocation(this, hit_sound, OtherActor->GetActorLocation(), OtherActor->GetActorRotation(), hit_sfx_vol);
+
+		if (hit_cam_shake_class)
+			GetWorld()->GetFirstPlayerController()->ClientStartCameraShake(hit_cam_shake_class);
 	}
 }
 

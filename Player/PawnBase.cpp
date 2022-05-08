@@ -5,8 +5,10 @@
 #include "Components/CapsuleComponent.h"
 #include "Particles/ParticleSystem.h"
 #include "Kismet/GameplayStatics.h"
+#include "MatineeCameraShake.h"
 
 #include "ToonTanks/World/Projectile.h"
+#include "ToonTanks/Player/ToonTanksPlayerController.h"
 
 
 
@@ -45,9 +47,13 @@ void APawnBase::Tick(float DeltaTime)
 
 void APawnBase::HandleDestruction()
 {
-	// TODO: Visual / sound fx
+	// Visual / sound fx
 	if (death_vfx && death_sound)
 	{
+		if (auto controller = Cast<AToonTanksPlayerController>(GetController()))
+		{
+			controller->ClientStartCameraShake(death_cam_shake_class);
+		}
 		UGameplayStatics::SpawnEmitterAtLocation(this, death_vfx, GetActorLocation(), GetActorRotation());
 		UGameplayStatics::PlaySoundAtLocation(this,death_sound, GetActorLocation(), GetActorRotation(),death_sfx_volume);
 	}

@@ -29,6 +29,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "sfx")
 	float hit_sfx_vol;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	TSubclassOf <class UMatineeCameraShake> hit_cam_shake_class;
+
 private:
 	
 	UPROPERTY(VisibleAnywhere, Category = "Components")

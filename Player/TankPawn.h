@@ -26,6 +26,8 @@ public:
 
 	APlayerController* GetTankController() { return controller; }
 
+	bool is_alive;
+
 protected:
 
 	UPROPERTY(EditAnywhere, Category = "Movement", meta = (AllowProtectedAccess = "true"))

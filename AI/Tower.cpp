@@ -42,7 +42,11 @@ void ATower::BeginPlay()
 
 void ATower::CheckFire()
 {
-	if (Can_Fire())
+	if(tank == nullptr)
+	{
+		return;
+	}
+	if (Can_Fire() && tank->is_alive)
 	{
 		Fire();
 	}
